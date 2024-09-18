@@ -1,0 +1,16 @@
+name: Temperature Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      temperature:
+        description: "Temperature data from Airflow"
+        required: true
+        default: "No temperature provided"
+
+jobs:
+  echo-temperature:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Temperature
+        run: echo "Received Temperature: ${{ github.event.inputs.temperature }}"
