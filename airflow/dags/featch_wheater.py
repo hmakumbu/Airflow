@@ -7,15 +7,15 @@ import json
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+
 load_dotenv()
 
 # Constants
 API_KEY = os.getenv('weather_api')
 CITY = 'senegal'
-TEMP_UNIT = 'Fahrenheit'  # We can use also 'Kelvin' 
+TEMP_UNIT = 'Fahrenheit'  # or 'Kelvin' 
 OUTPUT_FILE = os.getenv('OUTPUT_FILE')
-# OUTPUT_FILE = '/path/to/weather_data.json'
+
 
 # Fetch weather data from Visual Crossing API
 def fetch_weather_data(**kwargs):
@@ -28,7 +28,7 @@ def fetch_weather_data(**kwargs):
   
     return response
 
-# Convert temperature to desired unit
+# Convert temperature 
 def convert_temperature(**kwargs):
     ti = kwargs['ti']
     temp_celsius = ti.xcom_pull(task_ids='fetch_weather', key='temp_celsius')
@@ -42,7 +42,7 @@ def convert_temperature(**kwargs):
     
     ti.xcom_push(key='temp_converted', value=temp_converted)
 
-# Save temperature data to a file
+# data to a file
 def save_to_file(**kwargs):
     ti = kwargs['ti']
     temp_converted = ti.xcom_pull(task_ids='convert_temperature', key='temp_converted')
@@ -91,7 +91,7 @@ with DAG(
 
     end = DummyOperator(task_id='end')
 
-    # Define task dependencies
+    # task dependencies
     start >> fetch_weather >> convert_temperature >> save_file >> end
 
 # if __name__=="__main__":
