@@ -13,7 +13,7 @@ load_dotenv()
 # Constants
 API_KEY = os.getenv('weather_api')
 CITY = 'senegal'
-TEMP_UNIT = 'Fahrenheit'  # Change to 'Kelvin' if needed
+TEMP_UNIT = 'Fahrenheit'  # We can use also 'Kelvin' 
 OUTPUT_FILE = os.getenv('OUTPUT_FILE')
 # OUTPUT_FILE = '/path/to/weather_data.json'
 
